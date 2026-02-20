@@ -1,1104 +1,198 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <!-- Bloqueia o zoom no mobile -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-  <title>Combo PRO — Canva + ChatGPT + CapCut</title>
-
+  <meta charset="UTF-8">
+  <title>Luxo Joias</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
   <style>
-    :root{
-      --bg1:#0b1020;
-      --bg2:#0b1228;
-      --cardA: rgba(15, 26, 51, .72);
-      --cardB: rgba(15, 26, 51, .42);
-      --text:#eaf0ff;
-      --muted:#b8c3e6;
-      --line: rgba(255,255,255,.10);
-      --shadow: 0 18px 55px rgba(0,0,0,.45);
-      --shadowSoft: 0 10px 30px rgba(0,0,0,.28);
-      --radius: 18px;
-      --radius2: 22px;
-      --cta1:#00e676;
-      --cta2:#00c853;
-      --ctaText:#06240f;
-
-      --saleA: rgba(98,0,234,.25);
-      --saleB: rgba(0,229,255,.18);
-      --strike: rgba(255,255,255,.45);
-      --price: #dfffea;
-    }
-
-    *{box-sizing:border-box; margin:0; padding:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, Helvetica, sans-serif;}
-    body{
-      min-height:100vh;
-      color:var(--text);
-      background:
-        radial-gradient(1200px 600px at 15% 10%, rgba(98, 0, 234, .35), transparent 60%),
-        radial-gradient(900px 450px at 85% 20%, rgba(0, 229, 255, .25), transparent 60%),
-        radial-gradient(900px 600px at 60% 90%, rgba(0, 230, 118, .18), transparent 60%),
-        linear-gradient(180deg, var(--bg1), var(--bg2));
-      overflow-x:hidden;
-    }
-
-    body::before{
-      content:"";
-      position:fixed; inset:0;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.12'/%3E%3C/svg%3E");
-      opacity:.18;
-      pointer-events:none;
-      mix-blend-mode: overlay;
-    }
-
-    .wrap{
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 22px 16px 110px;
-    }
-
-    header{ padding: 18px 8px 10px; }
-
-    .topbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      margin-bottom:16px;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      font-weight:900;
-      letter-spacing:.2px;
-    }
-
-    .brand-badge{
-      width:38px; height:38px;
-      border-radius:12px;
-      background: linear-gradient(135deg, rgba(98,0,234,.95), rgba(0,229,255,.75));
-      box-shadow: 0 10px 25px rgba(0,0,0,.35);
-      display:grid; place-items:center;
-      border:1px solid rgba(255,255,255,.14);
-    }
-
-    .chip{
-      font-size:12px;
-      color: #d6dcff;
-      padding: 10px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(16, 28, 56, .55);
-      backdrop-filter: blur(10px);
-      white-space:nowrap;
-    }
-
-    .hero{
-      margin-top: 4px;
-      padding: 14px 10px 6px;
-      display:grid;
-      gap:10px;
-    }
-
-    .title{
-      font-size: 28px;
-      line-height:1.12;
-      font-weight: 950;
-      letter-spacing: -.4px;
-    }
-
-    .subtitle{
-      color: var(--muted);
-      font-size: 14.5px;
-      line-height: 1.55;
-      max-width: 70ch;
-    }
-
-    .pillrow{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top: 6px;
-    }
-
-    .pill{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      padding: 9px 12px;
-      border-radius: 999px;
-      background: rgba(16, 28, 56, .55);
-      border: 1px solid rgba(255,255,255,.12);
-      backdrop-filter: blur(10px);
-      color:#d9e0ff;
-      font-size: 12.5px;
-    }
-
-    .pill i{
-      width:18px; height:18px;
-      display:grid; place-items:center;
-      border-radius:6px;
-      background: rgba(255,255,255,.08);
-      border: 1px solid rgba(255,255,255,.10);
-      font-style:normal;
-      font-weight:900;
-      font-size:12px;
-    }
-
-    .grid{
-      margin-top: 14px;
-      display:grid;
-      gap: 14px;
-    }
-
-    .card{
-      border-radius: var(--radius2);
-      overflow:hidden;
-      border: 1px solid rgba(255,255,255,.12);
-      background: linear-gradient(180deg, var(--cardA), var(--cardB));
-      backdrop-filter: blur(14px);
-      box-shadow: var(--shadowSoft);
-      transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
-    }
-
-    .card:hover{
-      transform: translateY(-2px);
-      box-shadow: var(--shadow);
-      border-color: rgba(255,255,255,.20);
-    }
-
-    .media{ padding: 14px 14px 0; }
-
-    .thumb{
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.18);
-      overflow:hidden;
-      box-shadow: 0 12px 28px rgba(0,0,0,.22);
-      display:grid;
-      place-items:center;
-      padding: 10px;
-    }
-
-    .thumb img{
-      width: 100%;
-      max-width: 420px;
-      height: 160px;
-      object-fit: contain;
-      display:block;
-      border-radius: 12px;
-    }
-
-    .content{
-      padding: 14px 16px 18px;
-      display:grid;
-      gap: 10px;
-    }
-
-    .head{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:10px;
-    }
-
-    .hgroup{
-      display:grid;
-      gap:2px;
-    }
-
-    .hgroup h2{
-      font-size: 18px;
-      font-weight: 950;
-      letter-spacing: -.2px;
-    }
-
-    .hgroup small{
-      color: var(--muted);
-      font-size: 12.5px;
-      line-height: 1.35;
-    }
-
-    .tag{
-      padding: 8px 10px;
-      border-radius: 999px;
-      font-size: 12px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.06);
-      color:#dfe6ff;
-      white-space:nowrap;
-    }
-
-    .features{
-      display:grid;
-      gap: 8px;
-      margin-top: 2px;
-    }
-
-    .feat{
-      display:flex;
-      gap:10px;
-      align-items:flex-start;
-      color:#dfe6ff;
-      font-size: 13px;
-      line-height:1.45;
-    }
-
-    .check{
-      width:18px; height:18px;
-      border-radius:6px;
-      display:grid;
-      place-items:center;
-      background: rgba(0, 230, 118, .12);
-      border: 1px solid rgba(0, 230, 118, .25);
-      flex: 0 0 18px;
-      margin-top: 1px;
-      font-weight: 900;
-    }
-
-    .divider{
-      height:1px;
-      background: var(--line);
-      margin: 6px 0 2px;
-    }
-
-    .note{
-      color: var(--muted);
-      font-size: 12.5px;
-      line-height: 1.5;
-    }
-
-    /* ✅ Banner de Oferta */
-    .sale{
-      margin-top: 10px;
-      padding: 12px;
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,.12);
-      background:
-        radial-gradient(800px 260px at 15% 20%, var(--saleA), transparent 55%),
-        radial-gradient(700px 260px at 85% 15%, var(--saleB), transparent 55%),
-        rgba(16, 28, 56, .55);
-      backdrop-filter: blur(12px);
-      box-shadow: 0 18px 45px rgba(0,0,0,.28);
-      display:grid;
-      gap: 10px;
-    }
-
-    .sale-grid{
-      display:grid;
-      gap: 10px;
-    }
-
-    .sale-media{
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.14);
-      overflow:hidden;
-      padding: 10px;
-      display:flex;
-      gap: 12px;
-      align-items:center;
-      justify-content:center;
-      flex-wrap:nowrap; /* Aqui, alterei para evitar quebra de linha no mobile */
-      white-space: nowrap; /* Para garantir que o conteúdo não quebre */
-    }
-
-    .sale-media img{
-      width: 100%;
-      max-width: 150px; /* Diminuído um pouco mais para mobile */
-      height: 70px; /* Ajustada a altura proporcionalmente */
-    }
-
-    /* Pequena redução nas imagens na seção de oferta no mobile */
-    @media (max-width: 860px){
-      .sale-media img{
-        max-width: 130px; /* Ainda menor que antes */
-        height: 60px; /* Proporcionalmente menor também */
-      }
-      .plus{
-        width: 30px;
-        height: 30px;
-        font-size: 16px;
-      }
-    }
-
-    /* ✅ Sinal de "+" entre imagens */
-    .plus{
-      width: 34px;
-      height: 34px;
-      border-radius: 12px;
-      display:grid;
-      place-items:center;
-      font-weight: 950;
-      font-size: 18px;
-      color: #eaf0ff;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.12);
-      box-shadow: 0 10px 22px rgba(0,0,0,.18);
-      user-select: none;
-      white-space: nowrap; /* Para evitar quebra na posição do símbolo */
-    }
-
-    .sale-row{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 12px;
-      flex-wrap:wrap;
-    }
-
-    .sale-left{
-      display:grid;
-      gap: 2px;
-    }
-
-    .sale-left strong{
-      font-size: 14.5px;
-      letter-spacing: -.1px;
-    }
-
-    .sale-left span{
-      font-size: 12.5px;
-      color: var(--muted);
-      line-height: 1.35;
-    }
-
-    .prices{
-      display:flex;
-      align-items:baseline;
-      gap: 10px;
-      padding: 10px 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.06);
-      white-space:nowrap;
-    }
-
-    .old{
-      color: var(--strike);
-      text-decoration: line-through;
-      font-weight: 900;
-      font-size: 13px;
-    }
-
-    .new{
-      color: var(--price);
-      font-weight: 950;
-      font-size: 18px;
-      letter-spacing: -.2px;
-    }
-
-    .save-pill{
-      padding: 8px 10px;
-      border-radius: 999px;
-      font-size: 12px;
-      border: 1px solid rgba(0, 230, 118, .25);
-      background: rgba(0, 230, 118, .10);
-      color:#dfffea;
-      font-weight: 900;
-      white-space:nowrap;
-    }
-
-    /* Avaliações */
-    .reviews{
-      padding: 16px 16px 18px;
-      display:grid;
-      gap: 10px;
-    }
-    .reviews-top{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:12px;
-    }
-    .reviews-title{
-      display:grid;
-      gap:2px;
-    }
-    .reviews-title h2{
-      font-size: 18px;
-      font-weight: 950;
-      letter-spacing: -.2px;
-    }
-    .reviews-title small{
-      color: var(--muted);
-      font-size: 12.5px;
-      line-height: 1.35;
-    }
-    .rating-pill{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      padding: 10px 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.06);
-      white-space:nowrap;
-    }
-    .stars{ letter-spacing: 1px; font-size: 13px; }
-    .rating-text{
-      font-size: 12.5px;
-      font-weight: 900;
-      color:#dfe6ff;
-    }
-
-    .review-list{
-      display:grid;
-      gap:10px;
-      margin-top: 2px;
-    }
-
-    .review{
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(16, 28, 56, .45);
-      padding: 12px 12px 12px;
-      box-shadow: 0 10px 25px rgba(0,0,0,.16);
-      display:grid;
-      gap: 8px;
-    }
-
-    .review-topline{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:10px;
-    }
-
-    .review-user{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      min-width: 0;
-    }
-
-    .avatar{
-      width: 38px;
-      height: 38px;
-      border-radius: 999px;
-      object-fit: cover;
-      border: 1px solid rgba(255,255,255,.14);
-      box-shadow: 0 10px 20px rgba(0,0,0,.20);
-      background: rgba(0,0,0,.18);
-      flex: 0 0 38px;
-    }
-
-    .review-meta{
-      display:grid;
-      gap:2px;
-      min-width: 0;
-    }
-
-    .review-meta .quote{
-      font-size: 13px;
-      letter-spacing: -.1px;
-      font-weight: 900;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 100%;
-    }
-
-    .review-meta .name{
-      font-size: 12.5px;
-      color: var(--muted);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 100%;
-    }
-
-    .review-badge{
-      font-size: 11.5px;
-      padding: 7px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(0, 230, 118, .25);
-      background: rgba(0, 230, 118, .10);
-      color:#dfffea;
-      white-space:nowrap;
-      height: fit-content;
-    }
-
-    .review p{
-      color:#dfe6ff;
-      font-size: 13px;
-      line-height:1.5;
-    }
-
-    .comment-row{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top: 4px;
-    }
-
-    .comment{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      padding: 10px 12px;
-      border-radius: 999px;
-      background: rgba(16, 28, 56, .55);
-      border: 1px solid rgba(255,255,255,.12);
-      backdrop-filter: blur(10px);
-      color:#d9e0ff;
-      font-size: 12.5px;
-    }
-
-    .comment i{
-      width:18px; height:18px;
-      display:grid; place-items:center;
-      border-radius:6px;
-      background: rgba(255,255,255,.08);
-      border: 1px solid rgba(255,255,255,.10);
-      font-style:normal;
-      font-weight:900;
-      font-size:12px;
-    }
-
-    /* CTA sticky - fundo opaco */
-    .cta-bar{
-      position:fixed;
-      left:0; right:0; bottom:0;
-      padding: 12px 12px 16px;
-      background: #0b1020;
-      z-index: 50;
-    }
-
-    .cta-inner{
-      max-width: 980px;
-      margin:0 auto;
-      display:flex;
-      gap: 10px;
-      align-items:center;
-      justify-content:space-between;
-      padding: 10px;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(16, 28, 56, .55);
-      box-shadow: 0 18px 45px rgba(0,0,0,.45);
-    }
-
-    .cta-text{
-      display:grid;
-      gap: 2px;
-      padding: 2px 8px;
-    }
-
-    .cta-text strong{
-      font-size: 13.5px;
-      letter-spacing: -.1px;
-    }
-
-    .cta-text span{
-      font-size: 12px;
-      color: var(--ctaText);
-    }
-
-    .cta-btn{
-      border: none;
-      cursor:pointer;
-      padding: 14px 16px;
-      border-radius: 14px;
-      font-weight: 950;
-      letter-spacing:.2px;
-      color: var(--ctaText);
-      background: linear-gradient(135deg, var(--cta1), var(--cta2));
-      box-shadow: 0 14px 30px rgba(0, 230, 118, .18);
-      transition: transform .18s ease, filter .18s ease;
-      display:flex;
-      align-items:center;
-      gap:10px;
-      white-space:nowrap;
-      min-width: 170px;
-      justify-content:center;
-    }
-
-    .cta-btn:hover{ transform: translateY(-1px); filter: brightness(1.03); }
-    .cta-btn:active{ transform: translateY(1px) scale(.99); }
-
-    @media (min-width: 860px){
-      .wrap{ padding: 26px 22px 120px; }
-      .title{ font-size: 40px; }
-      .subtitle{ font-size: 15.5px; }
-      .grid{ gap: 16px; }
-      .content{ padding: 14px 18px 20px; }
-      .hgroup h2{ font-size: 20px; }
-      .cta-text strong{ font-size: 14px; }
-      .cta-btn{ min-width: 210px; padding: 14px 18px; }
-      .thumb img{ height: 190px; }
-      .avatar{ width: 42px; height: 42px; flex: 0 0 42px; }
-      .new{ font-size: 20px; }
-      .sale-media img{ height: 100px; }
-      .plus{ width: 38px; height: 38px; font-size: 20px; }
-    }
-
-    /* Mobile menor mesmo */
-    @media (max-width: 860px){
-      .sale-media img{
-        max-width: 120px;
-        height: 55px;
-      }
-      .plus{
-        width: 28px;
-        height: 28px;
-        font-size: 14px;
-      }
-    }
-
-    /* Modal styles */
-    .modal {
-      display: none;
-      position: fixed;
-      top:0;
-      left:0;
-      width: 100%;
-      height: 100%;
-      background-color: #ffffff;
-      justify-content: center;
-      align-items: center;
-      z-index: 999;
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f8f6f2;
+      color: #333;
+    }
+
+    header {
+      background: #111;
+      color: #d4af37;
       padding: 20px;
-      box-sizing: border-box;
+      text-align: center;
+      font-size: 28px;
+      letter-spacing: 2px;
     }
-    .modal.show {
+
+    nav {
       display: flex;
+      justify-content: center;
+      background: #1c1c1c;
+      padding: 10px;
     }
-    .modal-content {
+
+    nav a {
+      color: #d4af37;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+    }
+
+    .banner {
+      background: url('https://images.unsplash.com/photo-1603575448361-1535d8a8f2c6') center/cover;
+      height: 350px;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      max-width: 400px;
-      width: 100%;
+      justify-content: center;
+      color: white;
+      font-size: 36px;
+      font-weight: bold;
+      text-shadow: 2px 2px 10px black;
     }
-    .modal-content img {
-      max-width: 100%;
-      height: auto;
+
+    .container {
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 40px;
+      color: #111;
+    }
+
+    .produtos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .produto {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .produto:hover {
+      transform: scale(1.05);
+    }
+
+    .produto img {
+      width: 100%;
       border-radius: 10px;
     }
-    .buttons-container {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 20px;
-      width: 100%;
-    }
-    .modal button {
-      padding: 12px 20px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 950;
-      font-size: 14px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      width: 100%;
-    }
-    .btn-copy {
-      background-color: #00c853;
-      color: #fff;
-    }
-    .btn-pagou {
-      background-color: #2196f3;
-      color: #fff;
-    }
-    .btn-cancel {
-      background-color: #f44336;
-      color: #fff;
+
+    .preco {
+      font-size: 20px;
+      color: #b8860b;
+      margin: 10px 0;
     }
 
-    /* Estilo de aviso de compra (fundo verde, quebra linha, visual profissional) */
-    #purchaseAlert {
-      display: none;
+    button {
+      background: #d4af37;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #b8860b;
+      color: white;
+    }
+
+    .carrinho {
       position: fixed;
       top: 20px;
       right: 20px;
-      max-width: 300px;
-      padding: 16px;
-      background-color: #4CAF50; /* verde profissional */
-      color: #fff;
-      border-radius: 8px;
-      font-size: 14px;
-      line-height: 1.4;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      z-index: 1000;
-      white-space: pre-line; /* quebra de linha */
+      background: #d4af37;
+      padding: 10px 15px;
+      border-radius: 50px;
+      font-weight: bold;
     }
-    #purchaseAlert.show {
-      display: block;
+
+    footer {
+      background: #111;
+      color: #d4af37;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
     }
+
+    @media (max-width: 600px) {
+      .banner {
+        font-size: 24px;
+        height: 200px;
+      }
+    }
+
   </style>
 </head>
+
 <body>
-  <div class="wrap">
-    <header>
-      <div class="topbar">
-        <div class="brand">
-          <div class="brand-badge" aria-hidden="true">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-              <path d="M12 2l2.7 6.1L21 9l-4.7 4.2L17.7 20 12 16.9 6.3 20l1.4-6.8L3 9l6.3-.9L12 2z" stroke="rgba(255,255,255,.9)" stroke-width="1.6" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <span>Combo PRO</span>
-        </div>
-        <div class="chip">✅ 3 ferramentas premium em 1 combo</div>
-      </div>
 
-      <div class="hero">
-        <div class="title">Canva PRO + ChatGPT Plus + CapCut PRO</div>
-        <div class="subtitle">
-          🔥 Mega combo imperdível! 🎉<br>
-<br>🎨 Canva Pro + 🤖 ChatGPT Plus + 🎬 CapCut Pro por apenas <strong>R$ 24,99</strong> 😱<br>
-<br>🚀 Mais produtividade • 💎 mais qualidade • 📈 mais resultados em um só combo!
-        </div>
+<header>
+  LUXO JOIAS
+</header>
 
+<nav>
+  <a href="#">Início</a>
+  <a href="#produtos">Produtos</a>
+  <a href="#">Contato</a>
+</nav>
 
-        <!-- ✅ Banner (REMOVIDA a imagem solitária de cima) -->
-        <section class="sale" aria-label="Oferta do Combo PRO">
-          <div class="sale-grid">
+<div class="carrinho">
+  🛒 Carrinho: <span id="contador">0</span>
+</div>
 
-            <!-- Mini logos (com "+" entre elas) -->
-            <div class="sale-media" aria-label="Ferramentas do combo">
-              <img src="https://i.imgur.com/bPuRGRb.png" alt="Canva PRO" />
-              <span class="plus" aria-hidden="true">+</span>
-              <img src="https://i.imgur.com/52d7fEf.png" alt="ChatGPT Plus" />
-              <span class="plus" aria-hidden="true">+</span>
-              <img src="https://i.imgur.com/WXv7Ciq.png" alt="CapCut PRO" />
-            </div>
+<div class="banner">
+  Elegância que Brilha
+</div>
 
-            <div class="sale-row">
-              <div class="sale-left">
-                <strong>💥 Oferta por tempo limitado</strong>
-                <span>De <b>R$ 50</b> por apenas <b>R$ 24,99</b> no Combo PRO.</span>
-              </div>
+<div class="container" id="produtos">
+  <h2>Nossas Joias</h2>
 
-              <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end;">
-                <div class="prices" aria-label="Preço">
-                  <span class="old">R$ 50</span>
-                  <span class="new">R$ 24,99</span>
-                </div>
-                <span class="save-pill">🔥 -50% OFF</span>
-              </div>
-            </div>
-          </div>
-        </section>
+  <div class="produtos">
 
-      </div>
-    </header>
-
-    <main class="grid">
-
-      <!-- Canva -->
-      <section class="card">
-        <div class="media">
-          <div class="thumb">
-            <img src="https://i.imgur.com/bPuRGRb.png" alt="Canva PRO" />
-          </div>
-        </div>
-        <div class="content">
-          <div class="head">
-            <div class="hgroup">
-              <h2>🎨 Canva PRO</h2>
-              <small>Design profissional para redes sociais e negócios.</small>
-            </div>
-            <div class="tag">Design</div>
-          </div>
-
-          <div class="features">
-            <div class="feat"><div class="check">✓</div><div>Templates premium e recursos avançados.</div></div>
-            <div class="feat"><div class="check">✓</div><div>Mais agilidade para criar artes e anúncios.</div></div>
-            <div class="feat"><div class="check">✓</div><div>Visual “profissa” em poucos minutos.</div></div>
-          </div>
-
-          <div class="divider"></div>
-          <div class="note">Perfeito para: Instagram, lojas, tráfego pago e apresentações.</div>
-        </div>
-      </section>
-
-      <!-- ChatGPT -->
-      <section class="card">
-        <div class="media">
-          <div class="thumb">
-            <img src="https://i.imgur.com/52d7fEf.png" alt="ChatGPT Plus" />
-          </div>
-        </div>
-        <div class="content">
-          <div class="head">
-            <div class="hgroup">
-              <h2>🤖 ChatGPT Plus</h2>
-              <small>IA para conteúdo, ideias, textos e produtividade.</small>
-            </div>
-            <div class="tag">IA</div>
-          </div>
-
-          <div class="features">
-            <div class="feat"><div class="check">✓</div><div>Textos, scripts, descrições e copys prontas.</div></div>
-            <div class="feat"><div class="check">✓</div><div>Planejamento e suporte para tarefas do dia a dia.</div></div>
-            <div class="feat"><div class="check">✓</div><div>Produza mais e responda clientes mais rápido.</div></div>
-          </div>
-
-          <div class="divider"></div>
-          <div class="note">Perfeito para: atendimento, marketing, estudos e organização.</div>
-        </div>
-      </section>
-
-      <!-- CapCut -->
-      <section class="card">
-        <div class="media">
-          <div class="thumb">
-            <img src="https://i.imgur.com/WXv7Ciq.png" alt="CapCut PRO" />
-          </div>
-        </div>
-        <div class="content">
-          <div class="head">
-            <div class="hgroup">
-              <h2>🎬 CapCut PRO</h2>
-              <small>Edição premium para Reels, TikTok e Shorts.</small>
-            </div>
-            <div class="tag">Vídeo</div>
-          </div>
-
-          <div class="features">
-            <div class="feat"><div class="check">✓</div><div>Efeitos, transições e recursos avançados.</div></div>
-            <div class="feat"><div class="check">✓</div><div>Fluxo rápido para vídeos que vendem.</div></div>
-            <div class="feat"><div class="check">✓</div><div>Entrega de conteúdo com cara profissional.</div></div>
-          </div>
-
-          <div class="divider"></div>
-          <div class="note">Perfeito para: criadores, social media e anúncios em vídeo.</div>
-        </div>
-      </section>
-
-      <!-- Avaliações e Comentários -->
-      <section class="card">
-        <div class="reviews">
-          <div class="reviews-top">
-            <div class="reviews-title">
-              <h2>⭐ Avaliações dos Clientes</h2>
-              <small>Prova social para aumentar a confiança e gerar mais cliques no WhatsApp.</small>
-            </div>
-
-            <div class="rating-pill" aria-label="Avaliação média">
-              <div class="stars" aria-hidden="true">⭐⭐⭐⭐⭐</div>
-              <div class="rating-text">4,9/5</div>
-            </div>
-          </div>
-
-          <div class="review-list">
-            <div class="review">
-              <div class="review-topline">
-                <div class="review-user">
-                  <img class="avatar" src="https://i.pravatar.cc/96?img=12" alt="Foto de perfil de Carlos M." />
-                  <div class="review-meta">
-                    <div class="quote">“Entrega rápida e tudo funcionando perfeitamente.”</div>
-                    <div class="name">— <b>Carlos M.</b></div>
-                  </div>
-                </div>
-                <span class="review-badge">✅ Cliente verificado</span>
-              </div>
-              <p>“O combo facilita muito o dia a dia. Recomendo!”</p>
-            </div>
-
-            <div class="review">
-              <div class="review-topline">
-                <div class="review-user">
-                  <img class="avatar" src="https://i.pravatar.cc/96?img=47" alt="Foto de perfil de Fernanda R." />
-                  <div class="review-meta">
-                    <div class="quote">“Excelente custo-benefício.”</div>
-                    <div class="name">— <b>Fernanda R.</b></div>
-                  </div>
-                </div>
-                <span class="review-badge">✅ Cliente verificado</span>
-              </div>
-              <p>“Uso Canva, ChatGPT e CapCut todos os dias.”</p>
-            </div>
-
-            <div class="review">
-              <div class="review-topline">
-                <div class="review-user">
-                  <img class="avatar" src="https://i.pravatar.cc/96?img=33" alt="Foto de perfil de Lucas A." />
-                  <div class="review-meta">
-                    <div class="quote">“Atendimento rápido no WhatsApp.”</div>
-                    <div class="name">— <b>Lucas A.</b></div>
-                  </div>
-                </div>
-                <span class="review-badge">✅ Cliente verificado</span>
-              </div>
-              <p>“Ativação sem dor de cabeça e suporte eficiente.”</p>
-            </div>
-
-            <div class="review">
-              <div class="review-topline">
-                <div class="review-user">
-                  <img class="avatar" src="https://i.pravatar.cc/96?img=5" alt="Foto de perfil de Mariana S." />
-                  <div class="review-meta">
-                    <div class="quote">“Ideal pra quem trabalha com redes sociais.”</div>
-                    <div class="name">— <b>Mariana S.</b></div>
-                  </div>
-                </div>
-                <span class="review-badge">✅ Cliente verificado</span>
-              </div>
-              <p>“Muito profissional, uso pra criar conteúdo e anúncios.”</p>
-            </div>
-
-            <div class="review">
-              <div class="review-topline">
-                <div class="review-user">
-                  <img class="avatar" src="https://i.pravatar.cc/96?img=60" alt="Foto de perfil de Rafael P." />
-                  <div class="review-meta">
-                    <div class="quote">“Vale muito a pena.”</div>
-                    <div class="name">— <b>Rafael P.</b></div>
-                  </div>
-                </div>
-                <span class="review-badge">✅ Cliente verificado</span>
-              </div>
-              <p>“Economiza tempo e dinheiro, comprei e já comecei a usar.”</p>
-            </div>
-          </div>
-
-          <div class="divider"></div>
-
-          <div class="note"><b>💬 Comentários rápidos:</b></div>
-          <div class="comment-row">
-            <div class="comment"><i>💬</i> Facilitou demais minha criação de conteúdo.</div>
-            <div class="comment"><i>💬</i> Chegou tudo certinho, recomendo.</div>
-            <div class="comment"><i>💬</i> Combo completo, não paguei separado.</div>
-            <div class="comment"><i>💬</i> Uso no celular e no PC sem problema.</div>
-            <div class="comment"><i>💬</i> Suporte respondeu rápido e resolveu tudo.</div>
-          </div>
-
-          <div class="divider"></div>
-          <div class="note">
-            🔒 <b>Confiança:</b> Clientes satisfeitos diariamente • Ativação rápida • Suporte via WhatsApp • Compra segura
-          </div>
-        </div>
-      </section>
-
-    </main>
-  </div>
-
-  <!-- Botão único -->
-  <div class="cta-bar" role="region" aria-label="Comprar agora">
-    <div class="cta-inner">
-      <div class="cta-text">
-        <strong>Quer garantir o Combo PRO?</strong>
-      </div>
-
-      <button class="cta-btn" id="openModalBtn">
-        <span>COMPRAR AGORA</span>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M13 5l7 7-7 7" stroke="rgba(0,0,0,.75)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M4 12h15" stroke="rgba(0,0,0,.75)" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-      </button>
+    <div class="produto">
+      <img src="https://images.unsplash.com/photo-1611599538436-0f5dbec3fdf1" alt="Anel">
+      <h3>Anel de Ouro</h3>
+      <p class="preco">R$ 1.299,00</p>
+      <button onclick="adicionar()">Adicionar ao Carrinho</button>
     </div>
-  </div>
 
-  <!-- Aviso de compra -->
-  <div id="purchaseAlert">
-    🛒 <b id="nomeCliente">Joana</b> acabou de comprar o combo!
-    Aproveite também e garanta o seu!
-  </div>
-
-  <!-- Modal -->
-  <div class="modal" id="modal">
-    <div class="modal-content">
-      <img src="https://i.imgur.com/SBlwtmv.jpeg" alt="QR Code Pagamento" />
-      <div class="buttons-container" style="margin-top:20px; width:100%; display:flex; gap:10px; justify-content:center;">
-        <button class="btn-copy" id="copiarBtn">COPIAR QRCODE</button>
-        <button class="btn-pagou" id="pagueiBtn">JÁ PAGUEI</button>
-        <button class="btn-cancel" id="cancelBtn">CANCELAR A COMPRA</button>
-      </div>
+    <div class="produto">
+      <img src="https://images.unsplash.com/photo-1589128777073-263566ae5e4d" alt="Colar">
+      <h3>Colar Luxuoso</h3>
+      <p class="preco">R$ 2.499,00</p>
+      <button onclick="adicionar()">Adicionar ao Carrinho</button>
     </div>
+
+    <div class="produto">
+      <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f" alt="Brinco">
+      <h3>Brincos Diamante</h3>
+      <p class="preco">R$ 3.199,00</p>
+      <button onclick="adicionar()">Adicionar ao Carrinho</button>
+    </div>
+
   </div>
+</div>
 
-  <script>
-    // ✅ Troque aqui para o seu link:
-    const LINK_COMPRA = "https://wa.me/5500000000000";
+<footer>
+  © 2026 Luxo Joias - Todos os direitos reservados
+</footer>
 
-    // Lista de nomes para randomizar
-    const nomes = ["Joana", "Pedro", "Lucas", "Maria", "Ana", "Carlos", "Fernanda", "Rafael", "Mariana", "Rafaela"];
+<script>
+  let contador = 0;
 
-    // Função para obter nome aleatório
-    function getNomeAleatorio() {
-      return nomes[Math.floor(Math.random() * nomes.length)];
-    }
+  function adicionar() {
+    contador++;
+    document.getElementById("contador").innerText = contador;
+  }
+</script>
 
-
-    function comprarAgora() {
-      try { navigator.vibrate?.(20); } catch (_) {}
-      // Abrir modal
-      document.getElementById('modal').classList.add('show');
-    }
-
-    // Função para exibir o aviso de compra
-    function mostrarAvisoCompra() {
-      // Trocar o nome
-      const nomeAtual = getNomeAleatorio();
-      document.getElementById('nomeCliente').textContent = nomeAtual;
-
-      // Reproduzir som
-      audioAviso.play();
-
-      // Mostrar aviso
-      const aviso = document.getElementById('purchaseAlert');
-      aviso.classList.add('show');
-      // Esconder após 4 segundos
-      setTimeout(() => {
-        aviso.classList.remove('show');
-      }, 4000);
-    }
-
-    // Não exibe automaticamente ao carregar, apenas após clique ou intervalo
-    // Mostrar aviso ao clicar no botão
-    document.getElementById('openModalBtn').addEventListener('click', () => {
-      comprarAgora();
-      mostrarAvisoCompra();
-    });
-
-    // Intervalo de 20 segundos
-    setInterval(mostrarAvisoCompra, 10000);
-
-    // Elementos do modal
-    const modal = document.getElementById('modal');
-    const copiarBtn = document.getElementById('copiarBtn');
-    const pagueiBtn = document.getElementById('pagueiBtn');
-    const cancelBtn = document.getElementById('cancelBtn');
-
-    // Texto do QR code
-    const qrText = "00020126360014BR.GOV.BCB.PIX0114+5511934431629520400005303986540524.995802BR5922ADSON PORTO DOS SANTOS6009GUARULHOS62070503***63044D4E";
-
-    // Abrir modal ao clicar
-    document.getElementById('openModalBtn').addEventListener('click', comprarAgora);
-
-    // Copiar QR code
-    document.getElementById('copiarBtn').addEventListener('click', () => {
-      const input = document.createElement('input');
-      input.style.position = 'absolute';
-      input.style.left = '-9999px';
-      input.value = qrText;
-      document.body.appendChild(input);
-      input.select();
-      try {
-        document.execCommand('copy');
-        alert('QRCODE copiado para a área de transferência!');
-      } catch (err) {
-        alert('Copie o texto abaixo:\n' + qrText);
-      }
-      document.body.removeChild(input);
-    });
-
-    // JÁ PAGUEI (alterado para abrir link direto)
-    pagueiBtn.addEventListener('click', () => {
-      window.open("https://wa.me/5511934431629?text=Ol%C3%A1%2C%20j%C3%A1%20fiz%20o%20pagamento%2C%20confere%20se%20caiu%20ai%20no%20seu%20banco%20por%20favor.", '_blank');
-    });
-
-    // Cancelar compra
-    cancelBtn.addEventListener('click', () => {
-      document.getElementById('modal').classList.remove('show');
-    });
-  </script>
 </body>
 </html>
